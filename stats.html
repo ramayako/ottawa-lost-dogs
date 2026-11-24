@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Site Metrics · Lost &amp; Found Dogs Ottawa</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<script src="config.js"></script>
+<style>
+:root{
+  /* Plan: owner's metrics board; summary tiles, then 30-day charts, then sources and areas. */
+  --bg:#f3f5f8;--surface:#fff;--ink:#16233a;--muted:#5a6880;--line:#d9dfe8;--accent:#1f4fa3;--lost:#d2541b;--found:#0f8a77;--grid:#e8ecf2;
+  --font-display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;--font-body:"Source Sans 3","Segoe UI",system-ui,sans-serif;color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0f1622;--surface:#172131;--ink:#e7edf6;--muted:#9aa8bd;--line:#2a374b;--accent:#7fa7f0;--lost:#f0874f;--found:#3cc7af;--grid:#223047;color-scheme:dark;}}
+:root[data-theme="dark"]{--bg:#0f1622;--surface:#172131;--ink:#e7edf6;--muted:#9aa8bd;--line:#2a374b;--accent:#7fa7f0;--lost:#f0874f;--found:#3cc7af;--grid:#223047;color-scheme:dark;}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body)}
+h1,h2{font-family:var(--font-display);margin:0;text-wrap:balance}
+.wrap{max-width:1100px;margin:0 auto;padding:24px 20px 48px;display:grid;gap:20px}
+.head{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap}
+.head p{margin:4px 0 0;color:var(--muted)}
+.note{background:#fff6d6;color:#5a4a00;border-radius:8px;padding:8px 12px;font-size:14px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px}
+.tile .n{font-family:var(--font-display);font-size:32px;font-variant-numeric:tabular-nums}
+.tile .l{color:var(--muted);font-size:14px}
+.tile .d{font-size:13px;color:var(--muted);margin-top:2px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px}
+.panel h2{font-size:19px;margin-bottom:10px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}@media(max-width:760px){.two{grid-template-columns:1fr}}
+svg{width:100%;height:auto;display:block}
+svg text{fill:var(--muted);font-size:11px;font-family:var(--font-body)}
+.legend{display:flex;gap:14px;font-size:13px;color:var(--muted);margin-top:6px}
+.sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+td,th{padding:6px 4px;border-bottom:1px solid var(--line);text-align:left;font-size:15px}
+td.r,th.r{text-align:right}
+a{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <div><h1>Site metrics</h1><p>Lost &amp; Found Dogs Ottawa · visits and new reports, Ottawa time</p></div>
+    <a href="./">← Back to the board</a>
+  </div>
+  <div class="note" id="note" hidden></div>
+  <div class="tiles" id="tiles"></div>
+  <section class="panel"><h2>Visits, last 30 days</h2><div id="ch-visits"></div>
+    <div class="legend"><span><span class="sw" style="background:var(--accent)"></span>Page views</span><span><span class="sw" style="background:var(--muted)"></span>Visitors</span></div></section>
+  <section class="panel"><h2>New reports, last 30 days</h2><div id="ch-reports"></div>
+    <div class="legend"><span><span class="sw" style="background:var(--lost)"></span>Lost</span><span><span class="sw" style="background:var(--found)"></span>Found</span></div></section>
+  <div class="two">
+    <section class="panel"><h2>Where visitors come from (30 days)</h2><table id="t-ref"></table></section>
+    <section class="panel"><h2>Reports by neighbourhood (90 days)</h2><table id="t-hood"></table></section>
+  </div>
+</div>
+<script>
+(function(){
+"use strict";
+const CFG=window.ODF_CONFIG||{};const LIVE=!!(CFG.supabaseUrl&&CFG.anonKey);const API=(CFG.supabaseUrl||"").replace(/\/+$/,"");
+const $=s=>document.querySelector(s);
+const get=p=>fetch(API+"/rest/v1/"+p,{headers:{apikey:CFG.anonKey,Authorization:"Bearer "+CFG.anonKey}}).then(r=>{if(!r.ok)throw new Error("HTTP "+r.status);return r.json();});
+function demo(){
+  const days=[];for(let i=89;i>=0;i--){const d=new Date(Date.now()-i*864e5);const w=Math.max(0,Math.round(40+i*-0.3+18*Math.sin(i/3)+((i*7)%11)));days.push({day:d.toISOString().slice(0,10),page_views:w*2,visitors:w,new_lost:(i*3)%4===0?1:0,new_found:(i*5)%6===0?1:0,reunited:i%17===0?1:0,contacts_viewed:(i*3)%5});}
+  return{daily:days,totals:{total_page_views:days.reduce((a,b)=>a+b.page_views,0),total_visitors:2100,visitors_30d:980,open_lost:9,open_found:6,total_reunited:5,total_reports:31},
+    refs:[{source:"(direct)",views:820},{source:"www.facebook.com",views:540},{source:"www.google.com",views:310},{source:"www.reddit.com",views:95}],
+    hoods:[{neighbourhood:"Kanata South",lost:3,found:2},{neighbourhood:"Orléans East",lost:2,found:2},{neighbourhood:"Barrhaven",lost:2,found:1},{neighbourhood:"Westboro",lost:1,found:1}]};
+}
+const sum=(a,k)=>a.reduce((s,r)=>s+(+r[k]||0),0);
+function tile(n,l,d){const t=document.createElement("div");t.className="tile";const a=document.createElement("div");a.className="n";a.textContent=n.toLocaleString("en-CA");const b=document.createElement("div");b.className="l";b.textContent=l;t.append(a,b);if(d){const c=document.createElement("div");c.className="d";c.textContent=d;t.append(c);}return t;}
+function bars(target,rows,series){
+  const W=1000,H=240,P={l:36,r:8,t:10,b:26};const n=rows.length;const max=Math.max(1,...rows.map(r=>Math.max(...series.map(s=>+r[s.k]||0))));
+  const raw=max/4,mag=Math.pow(10,Math.floor(Math.log10(Math.max(raw,1))));const step=Math.max(1,[1,2,5,10].map(m=>m*mag).find(v=>v>=raw));const ticks=Math.max(1,Math.ceil(max/step));const nice=step*ticks;
+  const bw=(W-P.l-P.r)/n;const y=v=>P.t+(H-P.t-P.b)*(1-v/nice);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img">`;
+  for(let i=0;i<=ticks;i++){const v=step*i;s+=`<line x1="${P.l}" x2="${W-P.r}" y1="${y(v)}" y2="${y(v)}" stroke="var(--grid)"/><text x="${P.l-6}" y="${y(v)+4}" text-anchor="end">${Math.round(v)}</text>`;}
+  rows.forEach((r,i)=>{const gw=(bw-4)/series.length;series.forEach((se,j)=>{const v=+r[se.k]||0;const x=P.l+i*bw+2+j*gw;s+=`<rect x="${x.toFixed(1)}" y="${y(v).toFixed(1)}" width="${Math.max(1,gw-1).toFixed(1)}" height="${(y(0)-y(v)).toFixed(1)}" rx="2" fill="${se.c}"><title>${r.day}: ${v} ${se.k.replace("_"," ")}</title></rect>`;});
+    if(i%5===0||i===n-1){const d=new Date(r.day+"T12:00:00");s+=`<text x="${(P.l+i*bw+bw/2).toFixed(1)}" y="${H-8}" text-anchor="middle">${d.toLocaleDateString("en-CA",{month:"short",day:"numeric"})}</text>`;}});
+  $(target).innerHTML=s+"</svg>";
+}
+function table(target,head,rows){const t=$(target);t.replaceChildren();const tr=document.createElement("tr");head.forEach((h,i)=>{const th=document.createElement("th");th.textContent=h;if(i)th.className="r";tr.append(th);});t.append(tr);
+  if(!rows.length){const r=document.createElement("tr");const td=document.createElement("td");td.colSpan=head.length;td.textContent="No data yet";r.append(td);t.append(r);}
+  rows.forEach(row=>{const r=document.createElement("tr");row.forEach((c,i)=>{const td=document.createElement("td");td.textContent=c;if(i)td.className="r";r.append(td);});t.append(r);});}
+async function main(){
+  let D;
+  if(LIVE){try{const[daily,tot,refs,hoods]=await Promise.all([get("stats_daily?select=*"),get("stats_totals?select=*"),get("stats_referrers?select=*"),get("stats_neighbourhoods?select=*")]);D={daily,totals:tot[0]||{},refs,hoods};}
+    catch(e){$("#note").hidden=false;$("#note").textContent="Couldn't load metrics ("+e.message+").";return;}}
+  else{D=demo();$("#note").hidden=false;$("#note").textContent="Preview: example numbers. Real metrics appear once the site is connected to its database.";}
+  const d=D.daily,last=a=>d.slice(-a),today=d[d.length-1]||{};
+  const T=D.totals;
+  const tiles=$("#tiles");
+  tiles.append(
+    tile(+today.page_views||0,"Page views today",(+today.visitors||0)+" visitors"),
+    tile(sum(last(7),"page_views"),"Page views, 7 days",sum(last(7),"visitors")+" visitor-days"),
+    tile(+T.visitors_30d||0,"Visitors, 30 days",sum(last(30),"page_views").toLocaleString("en-CA")+" page views"),
+    tile(sum(last(1),"new_lost")+sum(last(1),"new_found"),"New reports today",sum(last(7),"new_lost")+sum(last(7),"new_found")+" in 7 days"),
+    tile(sum(last(30),"new_lost")+sum(last(30),"new_found"),"New reports, 30 days",sum(last(30),"new_lost")+" lost · "+sum(last(30),"new_found")+" found"),
+    tile(+T.open_lost||0,"Dogs still missing",(+T.open_found||0)+" found dogs waiting"),
+    tile(+T.total_reunited||0,"Reunited, all time",(+T.total_reports||0)+" reports in total"),
+    tile(sum(last(30),"contacts_viewed"),"Phone numbers viewed, 30 days",sum(last(7),"contacts_viewed")+" in 7 days"));
+  bars("#ch-visits",last(30),[{k:"page_views",c:"var(--accent)"},{k:"visitors",c:"var(--muted)"}]);
+  bars("#ch-reports",last(30),[{k:"new_lost",c:"var(--lost)"},{k:"new_found",c:"var(--found)"}]);
+  table("#t-ref",["Source","Views"],D.refs.map(r=>[r.source,(+r.views).toLocaleString("en-CA")]));
+  table("#t-hood",["Neighbourhood","Lost","Found"],D.hoods.map(r=>[r.neighbourhood,r.lost,r.found]));
+}
+main();
+})();
+</script>
+</body>
+</html>

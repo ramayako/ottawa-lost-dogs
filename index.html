@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lost &amp; Found Dogs Ottawa · Stittsville to Orléans &amp; Cumberland</title>
+<meta name="description" content="Free board to report a lost or found dog in Ottawa, Ontario, from Stittsville and Kanata in the west to Orléans and Cumberland in the east. Photos, map links and automatic matching between lost and found dogs.">
+<meta name="keywords" content="lost dog Ottawa, found dog Ottawa, missing dog Kanata, lost dog Orléans, lost dog Barrhaven, found dog Nepean, Ottawa lost pets">
+<meta name="geo.region" content="CA-ON">
+<meta name="geo.placename" content="Ottawa">
+<meta name="theme-color" content="#16233a">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https://*.supabase.co; connect-src 'self' https://*.supabase.co; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://ramayako.github.io/ottawa-lost-dogs/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lost &amp; Found Dogs Ottawa">
+<meta property="og:description" content="Lost or found a dog between Stittsville and Cumberland? Post it in two minutes. Found dogs are matched with lost dogs automatically.">
+<meta property="og:url" content="https://ramayako.github.io/ottawa-lost-dogs/">
+<meta property="og:image" content="https://ramayako.github.io/ottawa-lost-dogs/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="text/plain" href="llms.txt" title="Information for AI assistants">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"Lost & Found Dogs Ottawa","url":"https://ramayako.github.io/ottawa-lost-dogs/",
+ "description":"Community board for lost and found dogs in Ottawa, Ontario, from Stittsville to Orléans and Cumberland.",
+ "inLanguage":"en-CA","about":{"@type":"Thing","name":"Lost and found dogs"},
+ "spatialCoverage":{"@type":"Place","name":"Ottawa, Ontario, Canada (Stittsville to Orléans and Cumberland)","geo":{"@type":"GeoShape","box":"45.22 -76.00 45.55 -75.33"}}}
+</script>
+<script src="config.js"></script>
+<style>
+:root{
+  /* Plan: civic notice board. Ink-blue structure; signal orange = LOST, teal = FOUND. Two illustrated action panels, then list beside map, matches and AI watch. */
+  --bg:#f3f5f8; --surface:#ffffff; --ink:#16233a; --muted:#5a6880; --line:#d9dfe8;
+  --accent:#1f4fa3; --lost:#d2541b; --lost-soft:#fdeee5; --found:#0f8a77; --found-soft:#e2f5f1;
+  --warn-soft:#fff6d6; --water:#cfe0f3; --dog:#b98a5a; --dark:#2a2118;
+  --font-display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --font-body:"Source Sans 3","Segoe UI",system-ui,-apple-system,sans-serif;
+  --radius:12px; color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1622; --surface:#172131; --ink:#e7edf6; --muted:#9aa8bd; --line:#2a374b; --accent:#7fa7f0;
+  --lost:#f0874f; --lost-soft:#3a2218; --found:#3cc7af; --found-soft:#13332e; --warn-soft:#3a3214; --water:#1d3150; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#0f1622; --surface:#172131; --ink:#e7edf6; --muted:#9aa8bd; --line:#2a374b; --accent:#7fa7f0;
+  --lost:#f0874f; --lost-soft:#3a2218; --found:#3cc7af; --found-soft:#13332e; --warn-soft:#3a3214; --water:#1d3150; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.45}
+h1,h2,h3{font-family:var(--font-display);text-wrap:balance;margin:0;line-height:1.1}
+a{color:var(--accent)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.skip{position:absolute;left:-999px}.skip:focus{left:12px;top:12px;background:var(--surface);padding:8px;z-index:9}
+
+header.top{background:var(--surface);border-bottom:1px solid var(--line)}
+.top .wrap{padding-top:24px;padding-bottom:26px;display:grid;gap:20px}
+.brand h1{font-size:clamp(28px,4.4vw,42px);font-weight:800;letter-spacing:-.01em}
+.area{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:8px;color:var(--muted);font-weight:600}
+.compass{display:flex;align-items:center;gap:8px;font-size:14px;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:4px 12px}
+.compass .bar{width:70px;height:4px;border-radius:2px;background:linear-gradient(90deg,var(--lost),var(--found))}
+.brand p{margin:10px 0 0;color:var(--muted);max-width:66ch}
+.doors{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.door{display:grid;grid-template-rows:auto 1fr;border:2px solid var(--line);border-radius:16px;overflow:hidden;cursor:pointer;background:var(--surface);text-align:left;padding:0;transition:transform .15s,border-color .15s}
+.door:hover{transform:translateY(-2px)}
+.door.lost{border-color:var(--lost)}.door.found{border-color:var(--found)}
+.door svg{display:block;width:100%;height:auto}
+.door .txt{padding:14px 18px 16px;display:grid;gap:2px}
+.door .txt b{font-family:var(--font-display);font-size:24px}
+.door.lost .txt b{color:var(--lost)}.door.found .txt b{color:var(--found)}
+.door .txt span{color:var(--muted)}
+@media (max-width:640px){.doors{gap:10px}.door .txt{padding:10px 12px 12px}.door .txt b{font-size:19px}.door .txt span{font-size:14px}}
+
+.banner{margin:16px 0 0;padding:12px 16px;border-radius:var(--radius);background:var(--warn-soft);border:1px solid var(--line);display:none}
+.banner.show{display:block}
+.banner.match{background:var(--found-soft);border-color:var(--found)}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 0}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;font-size:14px;background:var(--surface);border:1px solid var(--line);font-variant-numeric:tabular-nums}
+.chip b{font-weight:700}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+.dot.lost{background:var(--lost)}.dot.found{background:var(--found)}
+
+main.wrap{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:24px;padding-top:20px;padding-bottom:40px}
+@media (max-width:900px){main.wrap{grid-template-columns:1fr}}
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.seg button{border:0;background:none;padding:7px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--surface);font-weight:600}
+.filters select,.filters input[type=search]{padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);min-width:0}
+.filters input[type=search]{flex:1;min-width:150px}
+.list{display:grid;gap:12px}
+.card{display:grid;grid-template-columns:104px minmax(0,1fr);gap:14px;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--line);border-radius:var(--radius);padding:12px;cursor:pointer;text-align:left;width:100%}
+.card.lost{border-left-color:var(--lost)}.card.found{border-left-color:var(--found)}
+.card.reunited{opacity:.6}
+.card:hover{border-color:var(--accent)}
+.thumb{width:104px;height:104px;border-radius:8px;object-fit:cover;background:var(--bg);display:block}
+.card h3{font-size:19px;font-weight:600}
+.meta{color:var(--muted);font-size:14px;margin-top:3px}
+.tagrow{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.tag{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:5px}
+.tag.lost{background:var(--lost-soft);color:var(--lost)}.tag.found{background:var(--found-soft);color:var(--found)}
+.tag.plain{background:var(--bg);color:var(--muted)}.tag.match{background:var(--found);color:#fff}
+.empty{padding:28px;text-align:center;color:var(--muted);background:var(--surface);border:1px dashed var(--line);border-radius:var(--radius)}
+aside{display:grid;gap:18px;align-content:start}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+.panel h2{font-size:20px;margin-bottom:8px}
+.panel p{margin:6px 0;color:var(--muted);font-size:15px}
+.map svg{width:100%;height:auto;display:block;border-radius:8px;background:var(--bg)}
+.map .lbl{font-size:24px;fill:var(--muted);font-family:var(--font-body)}
+.map .river{fill:none;stroke:var(--water);stroke-width:14;stroke-linecap:round;stroke-linejoin:round}
+.map .pin{cursor:pointer;stroke:var(--surface);stroke-width:3}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:8px}
+.pairs{display:grid;gap:10px}
+.pair{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;border:1px solid var(--line);border-radius:8px;padding:8px;background:var(--bg)}
+.pair button{border:0;background:none;text-align:left;cursor:pointer;padding:0;min-width:0}
+.pair .nm{font-weight:600;display:block;overflow-wrap:anywhere}
+.pair .sub{font-size:13px;color:var(--muted)}
+.score{font-family:var(--font-display);font-weight:800;font-size:18px;color:var(--found);text-align:center;font-variant-numeric:tabular-nums}
+.score small{display:block;font-size:11px;font-family:var(--font-body);font-weight:400;color:var(--muted)}
+pre.prompt{white-space:pre-wrap;word-break:break-word;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px;font-size:13px;margin:8px 0;max-height:240px;overflow:auto}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:8px 14px;cursor:pointer;font-weight:600}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.danger{color:var(--lost)}
+.res{font-size:14px;color:var(--muted)}.res h2{color:var(--ink)}
+.res a{display:block;margin-top:4px}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:14px;padding:18px 0 30px}
+footer .wrap{display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
+
+dialog{border:0;border-radius:14px;padding:0;max-width:720px;width:calc(100% - 24px);background:var(--surface);color:var(--ink);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(10,18,30,.55)}
+.dlg-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--surface);z-index:1}
+.dlg-head h2{font-size:22px}
+.dlg-body{padding:18px 20px 22px}
+.x{border:0;background:none;font-size:26px;line-height:1;cursor:pointer;color:var(--muted)}
+.choice{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.choice label{border:2px solid var(--line);border-radius:10px;padding:12px;cursor:pointer;font-weight:700;display:flex;gap:8px;align-items:center}
+.choice label:has(input[value="lost"]:checked){border-color:var(--lost);background:var(--lost-soft)}
+.choice label:has(input[value="found"]:checked){border-color:var(--found);background:var(--found-soft)}
+fieldset{border:0;padding:0;margin:0 0 18px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+legend{font-family:var(--font-display);font-weight:600;font-size:17px;margin-bottom:8px;padding:0}
+.f{display:grid;gap:4px;min-width:0;align-content:start}
+.f.full{grid-column:1/-1}
+.f>label,.f .lbl2{font-weight:600;font-size:14px}
+.f .hint{font-size:13px;color:var(--muted)}
+.f input:not([type=checkbox]):not([type=radio]),.f select,.f textarea{padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);width:100%}
+.f textarea{min-height:76px;resize:vertical}
+.checks{display:flex;flex-wrap:wrap;gap:8px}
+.checks label{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:8px;padding:8px 12px;cursor:pointer;background:var(--bg);font-size:15px}
+.checks label:has(input:checked){border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+@media (max-width:560px){fieldset{grid-template-columns:1fr}.choice{grid-template-columns:1fr}}
+.photo-drop{display:grid;grid-template-columns:120px 1fr;gap:12px;align-items:center}
+.photo-drop img{width:120px;height:120px;object-fit:cover;border-radius:8px;background:var(--bg)}
+.loc-ok{color:var(--found);font-size:13px;font-weight:600}.loc-bad{color:var(--lost);font-size:13px;font-weight:600}
+.form-foot{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:14px}
+.err{color:var(--lost);font-weight:600}
+.hp{position:absolute;left:-5000px;height:0;overflow:hidden}
+.detail-photo{width:100%;max-height:380px;object-fit:contain;background:var(--bg);border-radius:10px;display:block}
+dl.facts{display:grid;grid-template-columns:150px 1fr;gap:6px 14px;margin:16px 0}
+dl.facts dt{color:var(--muted);font-size:14px}
+dl.facts dd{margin:0;overflow-wrap:anywhere}
+@media (max-width:560px){dl.facts{grid-template-columns:1fr}dl.facts dt{margin-top:6px}}
+.contact{background:var(--bg);border-radius:10px;padding:12px 14px;display:grid;gap:4px}
+.contact .phone{font-family:var(--font-display);font-size:24px;font-weight:800}
+.code{font-family:ui-monospace,Menlo,monospace;font-size:22px;font-weight:700;letter-spacing:.08em;background:var(--bg);border:1px dashed var(--line);border-radius:8px;padding:8px 12px;display:inline-block}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#reports">Skip to reports</a>
+
+<!-- Illustration parts (original drawings) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="dog" viewBox="0 0 200 200">
+      <path d="M52 132 C30 120 28 96 36 84" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round"/>
+      <ellipse cx="96" cy="134" rx="46" ry="36" fill="currentColor"/>
+      <ellipse cx="78" cy="150" rx="28" ry="24" fill="currentColor"/>
+      <ellipse cx="94" cy="178" rx="18" ry="7" fill="currentColor"/>
+      <rect x="118" y="132" width="13" height="50" rx="6.5" fill="currentColor"/>
+      <rect x="134" y="132" width="13" height="50" rx="6.5" fill="currentColor"/>
+      <ellipse cx="128" cy="112" rx="24" ry="32" fill="currentColor"/>
+      <circle cx="142" cy="70" r="29" fill="currentColor"/>
+      <ellipse cx="168" cy="80" rx="18" ry="12" fill="currentColor"/>
+      <ellipse cx="132" cy="114" rx="11" ry="18" fill="#fff" opacity=".35"/>
+      <path d="M124 50 C108 54 106 80 112 92 C122 92 130 80 132 64 Z" fill="#000" opacity=".28"/>
+      <circle cx="152" cy="64" r="4" fill="#1d150e"/>
+      <circle cx="184" cy="76" r="5.5" fill="#1d150e"/>
+      <path d="M168 90 q8 5 14 0" fill="none" stroke="#1d150e" stroke-width="2.5" stroke-linecap="round"/>
+      <rect x="114" y="90" width="38" height="9" rx="4.5" fill="var(--collar,#c0392b)" transform="rotate(-18 133 94)"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <h1>Lost &amp; Found Dogs Ottawa</h1>
+      <div class="area">
+        <span>Ottawa, Ontario</span>
+        <span class="compass" title="Area covered, west to east">West · Stittsville <span class="bar" aria-hidden="true"></span> Orléans &amp; Cumberland · East</span>
+      </div>
+      <p>Lost your dog or found one? Post it here in two minutes, free. Every found dog is compared with every lost dog, and possible matches show up right away.</p>
+    </div>
+    <div class="doors">
+      <button class="door lost" id="btn-lost" type="button" aria-label="I lost my dog: report a missing dog">
+        <svg viewBox="0 0 400 210" role="img" aria-hidden="true">
+          <rect width="400" height="210" fill="var(--lost-soft)"/>
+          <circle cx="330" cy="46" r="22" fill="var(--lost)" opacity=".18"/>
+          <rect x="0" y="176" width="400" height="34" fill="var(--lost)" opacity=".12"/>
+          <rect x="70" y="40" width="8" height="140" rx="3" fill="var(--ink)" opacity=".55"/>
+          <path d="M74 40 q0 -14 22 -14 h10" fill="none" stroke="var(--ink)" stroke-width="7" opacity=".55" stroke-linecap="round"/>
+          <path d="M100 26 h22 l-6 14 h-12 z" fill="var(--ink)" opacity=".55"/>
+          <path d="M98 42 L72 176 L150 176 L124 42 Z" fill="#ffd27a" opacity=".28"/>
+          <use href="#dog" x="160" y="40" width="150" height="150" style="color:var(--dog);--collar:#2f6fd0"/>
+          <path d="M120 186 c18 -10 36 8 58 -2 s30 -8 40 0" fill="none" stroke="var(--lost)" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="222" cy="184" r="6" fill="none" stroke="var(--lost)" stroke-width="4"/>
+          <text x="318" y="96" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="72" fill="var(--lost)">?</text>
+        </svg>
+        <span class="txt"><b>I lost my dog</b><span>Report a missing dog with a photo and where it was last seen</span></span>
+      </button>
+      <button class="door found" id="btn-found" type="button" aria-label="I found a dog: report a dog you found or saw">
+        <svg viewBox="0 0 400 210" role="img" aria-hidden="true">
+          <rect width="400" height="210" fill="var(--found-soft)"/>
+          <rect x="0" y="176" width="400" height="34" fill="var(--found)" opacity=".12"/>
+          <path d="M262 176 V104 L318 62 L374 104 V176 Z" fill="var(--surface)" stroke="var(--found)" stroke-width="5" stroke-linejoin="round"/>
+          <rect x="304" y="132" width="28" height="44" rx="3" fill="var(--found)" opacity=".85"/>
+          <path d="M318 96 c-6 -8 -18 -2 -12 8 l12 10 l12 -10 c6 -10 -6 -16 -12 -8 z" fill="var(--lost)"/>
+          <path d="M190 166 C218 150 236 140 268 150" fill="none" stroke="var(--found)" stroke-width="4" stroke-dasharray="2 10" stroke-linecap="round"/>
+          <use href="#dog" x="40" y="40" width="150" height="150" style="color:#8a8f99;--collar:#e0a21a"/>
+          <path d="M70 70 c-8 -10 -22 -2 -15 9 l15 12 l15 -12 c7 -11 -7 -19 -15 -9 z" fill="var(--found)" transform="translate(110 -30)"/>
+        </svg>
+        <span class="txt"><b>I found a dog</b><span>Report a dog you found or saw so its family can reach you</span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="banner" id="banner-info" role="status"></div>
+  <div class="banner match" id="banner-match" role="status"></div>
+  <div class="stats">
+    <span class="chip"><span class="dot lost"></span><b id="n-lost">0</b> lost</span>
+    <span class="chip"><span class="dot found"></span><b id="n-found">0</b> found</span>
+    <span class="chip"><b id="n-pairs">0</b> possible matches</span>
+    <span class="chip"><b id="n-reunited">0</b> reunited</span>
+    <span class="chip" id="loading-chip">Loading reports…</span>
+  </div>
+</div>
+
+<main class="wrap">
+  <section id="reports" aria-labelledby="h-list">
+    <h2 id="h-list" style="font-size:22px;margin-bottom:12px">Lost and found dogs in Ottawa</h2>
+    <div class="filters">
+      <div class="seg" role="group" aria-label="Show">
+        <button type="button" data-f="all" aria-pressed="true">All</button>
+        <button type="button" data-f="lost" aria-pressed="false">Lost</button>
+        <button type="button" data-f="found" aria-pressed="false">Found</button>
+      </div>
+      <select id="f-hood" aria-label="Neighbourhood"><option value="">All neighbourhoods</option></select>
+      <input id="f-q" type="search" placeholder="Breed, colour, name…" aria-label="Search">
+      <label style="font-size:14px;display:flex;gap:6px;align-items:center"><input type="checkbox" id="f-reunited"> Show reunited</label>
+    </div>
+    <div class="list" id="list"></div>
+  </section>
+
+  <aside>
+    <section class="panel map" aria-labelledby="h-map">
+      <h2 id="h-map">Where</h2>
+      <div id="map"></div>
+      <div class="legend"><span><span class="dot lost"></span> Lost</span><span><span class="dot found"></span> Found</span><span>Approximate map, Stittsville (west) to Cumberland (east)</span></div>
+    </section>
+    <section class="panel" aria-labelledby="h-pairs">
+      <h2 id="h-pairs">Possible matches</h2>
+      <p>Found dogs that look like a lost dog: similar breed, colour and size, close by, found on or after the day it went missing.</p>
+      <div class="pairs" id="pairs"></div>
+    </section>
+    <section class="panel" aria-labelledby="h-ai">
+      <h2 id="h-ai">Let an AI watch for your dog</h2>
+      <p>After you post a lost dog, press <b>Get AI watch instructions</b>. Paste the text into Claude, ChatGPT or another assistant that can browse the web and ask it to check every few hours. It reads this board's open data and tells you when a matching dog is posted.</p>
+      <p>While this page is open, it also checks every two minutes and shows an alert at the top.</p>
+      <p><a href="llms.txt">Information for AI assistants</a></p>
+    </section>
+    <section class="panel res" aria-labelledby="h-res">
+      <h2 id="h-res">Also contact</h2>
+      <p>City of Ottawa By-law (stray dogs, licences): call 3-1-1.</p>
+      <a href="https://ottawahumane.ca/" rel="noopener">Ottawa Humane Society, lost &amp; found pets</a>
+      <a href="https://ottawa.ca/en/residents/animals-and-pets" rel="noopener">City of Ottawa, animals and pets</a>
+      <p style="margin-top:8px">Found a dog? A vet clinic or the Humane Society can scan it for a microchip for free.</p>
+    </section>
+  </aside>
+</main>
+
+<footer><div class="wrap">
+  <span>Lost &amp; Found Dogs Ottawa · a free community board for Ottawa, Ontario.</span>
+  <span>Phone numbers are never published in the list or the open data; each one is shown only when someone asks for it, with limits to stop copying. Visits are counted anonymously, without cookies.</span>
+</div></footer>
+
+<!-- Report form -->
+<dialog id="dlg-form" aria-labelledby="form-title">
+  <form id="form" novalidate>
+    <div class="dlg-head"><h2 id="form-title">Report a dog</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
+    <div class="dlg-body">
+      <div class="choice" role="radiogroup" aria-label="Report type">
+        <label><input type="radio" name="type" value="lost" id="t-lost"> I lost my dog</label>
+        <label><input type="radio" name="type" value="found" id="t-found"> I found or saw a dog</label>
+      </div>
+
+      <fieldset id="fs-situation">
+        <legend>What's the situation?</legend>
+        <div class="f full"><div class="checks" role="radiogroup" aria-label="Situation">
+          <label><input type="radio" name="situation" value="with_me" checked> The dog is with me now</label>
+          <label><input type="radio" name="situation" value="seen_only"> I saw it but couldn't catch it</label>
+          <label><input type="radio" name="situation" value="shelter"> I took it to a shelter or vet</label>
+        </div></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Photo</legend>
+        <div class="f full photo-drop">
+          <img id="ph-preview" alt="" src="">
+          <div class="f">
+            <label for="ph">Upload a clear photo of the dog</label>
+            <input id="ph" type="file" accept="image/*">
+            <span class="hint">A recent photo is the best way to get a match. It's made smaller before upload.</span>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>The dog</legend>
+        <div class="f"><label for="dog_name" id="lbl-name">Dog's name</label><input id="dog_name" maxlength="60" autocomplete="off"></div>
+        <div class="f"><label for="breed">Breed</label><input id="breed" list="breeds" maxlength="80" placeholder="e.g. Labrador, mixed"><datalist id="breeds"></datalist></div>
+        <div class="f"><label for="colour">Colour / markings</label><input id="colour" maxlength="80" placeholder="e.g. black with white chest"></div>
+        <div class="f"><label for="size">Size</label><select id="size"><option value="unknown">Not sure</option><option value="small">Small (under 10 kg)</option><option value="medium">Medium (10–25 kg)</option><option value="large">Large (over 25 kg)</option></select></div>
+        <div class="f"><label for="sex">Sex</label><select id="sex"><option value="unknown">Not sure</option><option value="male">Male</option><option value="female">Female</option></select></div>
+        <div class="f"><label for="age">Age</label><select id="age"><option value="unknown">Not sure</option><option value="puppy">Puppy (under 1 year)</option><option value="adult">Adult</option><option value="senior">Senior (8+ years)</option></select></div>
+        <div class="f"><label for="id_type">Identification</label><select id="id_type"><option value="unknown">Not sure</option><option value="tag">Collar with tag</option><option value="microchip">Microchip</option><option value="tattoo">Tattoo</option><option value="none">No ID</option></select></div>
+        <div class="f"><label for="id_details">ID details</label><input id="id_details" maxlength="120" placeholder="Text on the tag, Ottawa licence"></div>
+        <div class="f full"><span class="lbl2">Tick all that apply</span>
+          <div class="checks" id="traits">
+            <label><input type="checkbox" value="collar"> Wearing a collar</label>
+            <label><input type="checkbox" value="harness"> Wearing a harness</label>
+            <label><input type="checkbox" value="friendly"> Friendly, comes when called</label>
+            <label><input type="checkbox" value="shy"> Shy or scared, don't chase</label>
+            <label><input type="checkbox" value="may_bite"> May bite if cornered</label>
+            <label><input type="checkbox" value="medication"> Needs medication</label>
+            <label><input type="checkbox" value="fixed"> Spayed / neutered</label>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend id="lg-where">Where and when</legend>
+        <div class="f"><label for="hood">Neighbourhood *</label><select id="hood" required><option value="">Choose…</option></select></div>
+        <div class="f"><label for="address">Street, intersection or park</label><input id="address" maxlength="120" placeholder="e.g. Hazeldean Rd &amp; Terry Fox Dr"></div>
+        <div class="f full">
+          <label for="coords">Exact spot from Google Maps (optional, improves matching)</label>
+          <input id="coords" placeholder="Paste a Google Maps link or coordinates like 45.3087, -75.9064" autocomplete="off">
+          <span class="hint"><a id="gmaps-open" href="https://www.google.com/maps/@45.40,-75.70,11z" target="_blank" rel="noopener">Open Google Maps</a>, find the spot, right-click it (long-press on a phone), tap the numbers to copy them, then paste here.</span>
+          <span id="coords-msg" aria-live="polite"></span>
+        </div>
+        <div class="f"><label for="event_date" id="lbl-date">Date lost *</label><input id="event_date" type="date" required></div>
+        <div class="f"><label for="event_time">Approximate time</label><input id="event_time" type="time"></div>
+        <div class="f full"><label for="description">What happened, anything else</label><textarea id="description" maxlength="800" placeholder="e.g. Ran off during fireworks, heading toward the park."></textarea></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Who to call</legend>
+        <div class="f"><label for="contact_name">Your name *</label><input id="contact_name" maxlength="60" autocomplete="name" required></div>
+        <div class="f"><label for="contact_phone">Phone *</label><input id="contact_phone" type="tel" maxlength="30" autocomplete="tel" required placeholder="613-555-0123"></div>
+        <div class="f full"><label for="contact_email">Email (optional)</label><input id="contact_email" type="email" maxlength="100" autocomplete="email"></div>
+        <div class="hp" aria-hidden="true"><label for="website">Leave empty</label><input id="website" tabindex="-1" autocomplete="off"></div>
+        <div class="f full"><label style="font-weight:400;display:flex;gap:8px;align-items:flex-start"><input type="checkbox" id="consent" style="margin-top:4px"> I agree that this report is shown publicly. My name and phone number are shown only to people who press “Show phone number” on my report.</label></div>
+      </fieldset>
+
+      <div class="form-foot">
+        <span class="err" id="form-err" aria-live="assertive"></span>
+        <button class="btn primary" type="submit" id="submit">Post report</button>
+      </div>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="dlg-detail" aria-labelledby="d-title">
+  <div class="dlg-head"><h2 id="d-title">Report</h2><button class="x" type="button" data-close aria-label="Close">×</button></div>
+  <div class="dlg-body" id="d-body"></div>
+</dialog>
+
+<script>
+(function(){
+"use strict";
+const CFG = window.ODF_CONFIG || {};
+const LIVE = !!(CFG.supabaseUrl && CFG.anonKey);
+const API = (CFG.supabaseUrl||"").replace(/\/+$/,"");
+const MATCH_MIN = 45;
+
+/* West to east, approximate centre points */
+const HOODS = [
+  ["Stittsville",45.260,-75.920],["Kanata South",45.293,-75.885],["Kanata North",45.344,-75.927],
+  ["Bells Corners",45.322,-75.825],["Bayshore / Crystal Bay",45.348,-75.810],["Britannia / Pinecrest",45.360,-75.795],
+  ["Barrhaven",45.275,-75.740],["Nepean / Centrepointe",45.345,-75.760],["Carlingwood / Woodroffe",45.375,-75.765],
+  ["Westboro",45.390,-75.755],["Hintonburg / Wellington West",45.400,-75.730],["Little Italy / Chinatown",45.405,-75.710],
+  ["Centretown",45.415,-75.695],["The Glebe",45.400,-75.687],["Old Ottawa South",45.392,-75.680],
+  ["Hunt Club / South Keys",45.350,-75.665],["Riverside South",45.275,-75.690],["Alta Vista",45.388,-75.660],
+  ["Riverview / Elmvale",45.398,-75.640],["ByWard Market / Lowertown",45.430,-75.690],["Sandy Hill",45.425,-75.677],
+  ["New Edinburgh / Rockcliffe",45.443,-75.675],["Vanier",45.437,-75.660],["Overbrook / Cyrville",45.430,-75.640],
+  ["Gloucester / Blossom Park",45.360,-75.620],["Beacon Hill / Rothwell Heights",45.455,-75.590],
+  ["Blackburn Hamlet",45.430,-75.560],["Orléans West",45.470,-75.520],["Orléans South",45.445,-75.500],
+  ["Orléans East",45.465,-75.470],["Navan",45.420,-75.420],["Cumberland",45.517,-75.405]
+];
+const HOOD = Object.fromEntries(HOODS.map(h=>[h[0],{lat:h[1],lng:h[2]}]));
+const BREEDS = ["Mixed / unknown","Labrador Retriever","Golden Retriever","German Shepherd","Husky","Border Collie","Australian Shepherd","Beagle","Poodle","Goldendoodle","Labradoodle","Bernese Mountain Dog","Boxer","Bulldog","French Bulldog","Pit Bull / Staffordshire","Rottweiler","Doberman","Shih Tzu","Chihuahua","Yorkshire Terrier","Jack Russell Terrier","Dachshund","Pug","Corgi","Cavalier King Charles","Maltese","Bichon Frise","Schnauzer","Shepherd mix","Lab mix","Terrier mix"];
+const TRAITS = {collar:"Collar",harness:"Harness",friendly:"Friendly",shy:"Shy, don't chase",may_bite:"May bite if cornered",medication:"Needs medication",fixed:"Spayed / neutered"};
+const SITUATION = {with_me:"With the finder now",seen_only:"Seen, not caught",shelter:"At a shelter or vet"};
+const BOX = {latMin:45.22,latMax:45.55,lngMin:-76.0,lngMax:-75.33};
+
+const $ = s=>document.querySelector(s);
+const el=(tag,attrs,...kids)=>{const e=document.createElement(tag);if(attrs)for(const[k,v]of Object.entries(attrs)){if(k==="class")e.className=v;else if(k==="text")e.textContent=v;else if(k.startsWith("on"))e.addEventListener(k.slice(2),v);else if(v!==undefined&&v!==null&&v!==false)e.setAttribute(k,v);}for(const k of kids){if(k==null)continue;e.append(k.nodeType?k:document.createTextNode(String(k)));}return e;};
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}};
+
+/* ---------- matching ---------- */
+const COLOURS=["black","white","brown","grey","golden","red","brindle","merle","blue","sable","tricolor","spotted"];
+const SYN={gold:"golden",yellow:"golden",gray:"grey",silver:"grey",tricolour:"tricolor",chocolate:"brown",liver:"brown",tan:"brown",cream:"white",fawn:"golden",apricot:"golden"};
+function toks(s){return String(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").split(/[^a-z]+/).filter(w=>w.length>2&&!["and","the","with","mix","mixed","dog","unknown","breed"].includes(w));}
+const ctok=s=>toks(s).map(w=>SYN[w]||w).filter(w=>COLOURS.includes(w));
+function pos(r){if(typeof r.lat==="number"&&typeof r.lng==="number")return{lat:r.lat,lng:r.lng,exact:true};const h=HOOD[r.neighbourhood];return h?{lat:h.lat,lng:h.lng,exact:false}:null;}
+function km(a,b){const R=6371,t=x=>x*Math.PI/180;const dLa=t(b.lat-a.lat),dLo=t(b.lng-a.lng);const x=Math.sin(dLa/2)**2+Math.cos(t(a.lat))*Math.cos(t(b.lat))*Math.sin(dLo/2)**2;return 2*R*Math.asin(Math.sqrt(x));}
+function matchScore(lost,found){
+  if(!lost||!found||lost.type!=="lost"||found.type!=="found")return 0;
+  let s=0;const pl=pos(lost),pf=pos(found);
+  if(pl&&pf){const d=km(pl,pf);s+=d<=1?35:d<=3?28:d<=6?18:d<=12?8:0;}
+  const dd=(Date.parse(found.event_date)-Date.parse(lost.event_date))/864e5;
+  if(!isNaN(dd)){if(dd<-1)return 0;s+=dd<=3?20:dd<=10?14:dd<=30?7:2;}
+  const bl=toks(lost.breed),bf=toks(found.breed);
+  if(!bl.length||!bf.length)s+=5;else if(bl.join(" ")===bf.join(" "))s+=20;else if(bl.some(w=>bf.includes(w)))s+=14;
+  const cl=ctok(lost.colour),cf=ctok(found.colour);
+  if(!cl.length||!cf.length)s+=3;else if(cl.some(w=>cf.includes(w)))s+=12;else s-=8;
+  const o=["small","medium","large"];
+  if(o.includes(lost.size)&&o.includes(found.size)){const g=Math.abs(o.indexOf(lost.size)-o.indexOf(found.size));s+=g===0?8:g===1?2:-10;}
+  if(["male","female"].includes(lost.sex)&&["male","female"].includes(found.sex))s+=lost.sex===found.sex?5:-15;
+  const nl=toks(lost.dog_name),nf=toks(found.dog_name);if(nl.length&&nf.length&&nl.some(w=>nf.includes(w)))s+=25;
+  return Math.max(0,Math.min(100,Math.round(s)));
+}
+
+/* ---------- data layer ---------- */
+const H=()=>({apikey:CFG.anonKey,Authorization:"Bearer "+CFG.anonKey});
+async function rest(path,opts={}){
+  const r=await fetch(API+"/rest/v1/"+path,Object.assign({},opts,{headers:Object.assign({"Content-Type":"application/json"},H(),opts.headers||{})}));
+  if(!r.ok){let m="";try{m=(await r.json()).message;}catch(e){}throw new Error(m||("HTTP "+r.status));}
+  const t=await r.text();return t?JSON.parse(t):null;
+}
+const rpc=(name,body)=>rest("rpc/"+name,{method:"POST",body:JSON.stringify(body)});
+async function upload(name,blob){
+  const r=await fetch(API+"/storage/v1/object/photos/"+name,{method:"POST",headers:Object.assign({"Content-Type":"image/jpeg","x-upsert":"false"},H()),body:blob});
+  if(!r.ok)throw new Error("Photo upload failed ("+r.status+")");
+}
+const photoUrl=(r,thumb)=>{
+  if(r._demoPhoto)return r._demoPhoto;
+  if(!LIVE||!r.photo||!/^[a-z0-9-]+$/i.test(r.photo))return null;
+  return API+"/storage/v1/object/public/photos/"+r.photo+(thumb?"-t.jpg":".jpg");
+};
+
+/* ---------- preview data ---------- */
+function demoRows(){
+  const d=n=>{const t=new Date(Date.now()-n*864e5);return t.toISOString().slice(0,10);};
+  return [
+    {id:"11111111-0000-4000-8000-000000000001",type:"lost",status:"open",dog_name:"Maple",breed:"Golden Retriever",colour:"golden, white patch on chest",size:"large",sex:"female",age:"adult",id_type:"tag",id_details:"Pink collar, bone-shaped tag",traits:["collar","shy"],situation:"",neighbourhood:"Kanata South",address:"Walter Baker Park, Terry Fox Dr",lat:45.2995,lng:-75.9038,event_date:d(3),event_time:"17:30",description:"EXAMPLE. Slipped her leash during a walk. Nervous with strangers; call her name softly.",contact_name:"Example owner",contact_phone:"613-555-0101",phone_hint:"01",contact_email:"",photo:"",match_ids:[],matches:[],created_at:new Date(Date.now()-3*864e5).toISOString()},
+    {id:"11111111-0000-4000-8000-000000000002",type:"found",status:"open",dog_name:"",breed:"Golden Retriever",colour:"gold",size:"large",sex:"female",age:"adult",id_type:"none",id_details:"Pink collar, no tag",traits:["collar","friendly"],situation:"with_me",neighbourhood:"Kanata South",address:"Eagleson Rd near Hope Side Rd",lat:null,lng:null,event_date:d(1),event_time:"08:15",description:"EXAMPLE. Found near the road, safe in our backyard.",contact_name:"Example finder",contact_phone:"613-555-0102",phone_hint:"02",contact_email:"",photo:"",match_ids:["11111111-0000-4000-8000-000000000001"],matches:[],created_at:new Date(Date.now()-864e5).toISOString()},
+    {id:"11111111-0000-4000-8000-000000000003",type:"found",status:"open",dog_name:"Biscuit",breed:"Jack Russell Terrier",colour:"white and brown",size:"small",sex:"male",age:"senior",id_type:"tag",id_details:"Tag says Biscuit, no phone",traits:["collar"],situation:"seen_only",neighbourhood:"Cumberland",address:"Cumberland Heritage Village Museum area",lat:null,lng:null,event_date:d(0),event_time:"09:00",description:"EXAMPLE. Running along Old Montreal Rd, wouldn't come close.",contact_name:"Example finder",contact_phone:"613-555-0103",phone_hint:"03",contact_email:"",photo:"",match_ids:[],matches:[],created_at:new Date().toISOString()}
+  ];
+}
+
+/* ---------- state ---------- */
+let reports=[];
+let filter={type:"all",hood:"",q:"",reunited:false};
+let mine=store.get("odf-mine",[]);          // [{id, code}]
+let seen=new Set(store.get("odf-seen",[]));
+const isMine=id=>mine.some(m=>m.id===id);
+const myCode=id=>(mine.find(m=>m.id===id)||{}).code;
+
+function placeholder(type){
+  const c=type==="lost"?"%23d2541b":"%230f8a77";
+  return "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23e6eaf0'/><g fill='"+c+"' opacity='.55'><ellipse cx='50' cy='62' rx='17' ry='14'/><ellipse cx='30' cy='42' rx='7' ry='9'/><ellipse cx='43' cy='32' rx='7' ry='9'/><ellipse cx='57' cy='32' rx='7' ry='9'/><ellipse cx='70' cy='42' rx='7' ry='9'/></g></svg>";
+}
+function fmtDate(d){if(!d)return"";const t=new Date(d+"T12:00:00");return isNaN(t)?d:t.toLocaleDateString("en-CA",{weekday:"short",month:"short",day:"numeric"});}
+function title(r){
+  if(r.type==="lost")return(r.dog_name||"Unnamed dog")+(r.breed?" · "+r.breed:"");
+  return"Found: "+(r.breed||"dog")+(r.dog_name?" (tag says "+r.dog_name+")":"");
+}
+function allPairs(){
+  const lost=reports.filter(r=>r.type==="lost"&&r.status!=="reunited"),found=reports.filter(r=>r.type==="found"&&r.status!=="reunited");
+  const out=[];for(const l of lost)for(const f of found){const s=matchScore(l,f);if(s>=MATCH_MIN)out.push({l,f,s});}
+  return out.sort((a,b)=>b.s-a.s);
+}
+function matchesFor(r){
+  return reports.filter(x=>x.type!==r.type&&x.status!=="reunited").map(x=>({r:x,s:r.type==="lost"?matchScore(r,x):matchScore(x,r)})).filter(m=>m.s>=MATCH_MIN).sort((a,b)=>b.s-a.s);
+}
+function visible(){
+  const q=filter.q.trim().toLowerCase();
+  return reports.filter(r=>{
+    if(!filter.reunited&&r.status==="reunited")return false;
+    if(filter.type!=="all"&&r.type!==filter.type)return false;
+    if(filter.hood&&r.neighbourhood!==filter.hood)return false;
+    if(q){const hay=[r.dog_name,r.breed,r.colour,r.address,r.description,r.neighbourhood,r.id_details].join(" ").toLowerCase();if(!hay.includes(q))return false;}
+    return true;
+  });
+}
+function render(){
+  const open=reports.filter(r=>r.status!=="reunited");
+  $("#n-lost").textContent=open.filter(r=>r.type==="lost").length;
+  $("#n-found").textContent=open.filter(r=>r.type==="found").length;
+  $("#n-reunited").textContent=reports.filter(r=>r.status==="reunited").length;
+  const pairs=allPairs();$("#n-pairs").textContent=pairs.length;
+  const list=$("#list");list.replaceChildren();const vis=visible();
+  if(!vis.length)list.append(el("div",{class:"empty",text:reports.length?"No reports match these filters.":"No reports yet. Use the panels above to post the first one."}));
+  for(const r of vis){
+    const m=r.status==="reunited"?[]:matchesFor(r);
+    const img=el("img",{class:"thumb",alt:"",loading:"lazy",src:photoUrl(r,true)||placeholder(r.type)});
+    img.onerror=()=>{img.src=placeholder(r.type);};
+    const sit=r.type==="found"&&SITUATION[r.situation]?el("span",{class:"tag plain",text:SITUATION[r.situation]}):null;
+    const card=el("button",{class:"card "+r.type+(r.status==="reunited"?" reunited":""),type:"button",onclick:()=>openDetail(r.id)},img,
+      el("div",null,el("h3",{text:title(r)}),
+        el("div",{class:"meta",text:[r.colour,r.size&&r.size!=="unknown"?r.size:null,r.age&&r.age!=="unknown"?r.age:null].filter(Boolean).join(" · ")}),
+        el("div",{class:"meta",text:(r.type==="lost"?"Last seen ":"Found ")+fmtDate(r.event_date)+(r.event_time?" around "+r.event_time:"")+" · "+(r.address?r.address+", ":"")+(r.neighbourhood||"")}),
+        el("div",{class:"tagrow"},
+          el("span",{class:"tag "+(r.status==="reunited"?"plain":r.type),text:r.status==="reunited"?"Reunited":r.type==="lost"?"Lost":"Found"}),sit,
+          r.id_type&&!["unknown","none"].includes(r.id_type)?el("span",{class:"tag plain",text:{tag:"Tag",microchip:"Microchip",tattoo:"Tattoo"}[r.id_type]||""}):null,
+          m.length?el("span",{class:"tag match",text:m.length+" possible match"+(m.length>1?"es":"")}):null,
+          isMine(r.id)?el("span",{class:"tag plain",text:"Your report"}):null)));
+    list.append(card);
+  }
+  renderPairs(pairs);renderMap();checkMyMatches(pairs);
+}
+function renderPairs(pairs){
+  const box=$("#pairs");box.replaceChildren();
+  if(!pairs.length){box.append(el("p",{text:"No likely matches right now. New reports are checked automatically."}));return;}
+  for(const p of pairs.slice(0,8)){
+    const side=r=>el("button",{type:"button",onclick:()=>openDetail(r.id)},el("span",{class:"nm",text:r.type==="lost"?(r.dog_name||"Lost dog"):"Found "+(r.breed||"dog")}),el("span",{class:"sub",text:(r.neighbourhood||"")+" · "+fmtDate(r.event_date)}));
+    box.append(el("div",{class:"pair"},side(p.l),el("div",{class:"score"},String(p.s),el("small",{text:"match"})),side(p.f)));
+  }
+}
+function proj(lat,lng){return{x:(lng-BOX.lngMin)/(BOX.lngMax-BOX.lngMin)*900,y:(BOX.latMax-lat)/(BOX.latMax-BOX.latMin)*630};}
+function renderMap(){
+  const NS="http://www.w3.org/2000/svg";const s=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;};
+  const svg=s("svg",{viewBox:"0 0 900 630",role:"img","aria-label":"Approximate map of reports from Stittsville to Cumberland"});
+  const pts=[[-76.0,45.47],[-75.92,45.43],[-75.85,45.395],[-75.80,45.378],[-75.76,45.395],[-75.72,45.415],[-75.70,45.428],[-75.68,45.45],[-75.62,45.47],[-75.55,45.482],[-75.47,45.497],[-75.40,45.520],[-75.33,45.545]].map(([ln,la])=>{const p=proj(la,ln);return p.x.toFixed(0)+","+p.y.toFixed(0);}).join(" ");
+  svg.append(s("polyline",{class:"river",points:pts}));
+  const t0=s("text",{class:"lbl",x:"470",y:"70","font-style":"italic"});t0.textContent="Ottawa River";svg.append(t0);
+  for(const[n,la,ln]of[["Stittsville",45.255,-75.92],["Kanata",45.33,-75.91],["Barrhaven",45.262,-75.77],["Nepean",45.345,-75.76],["Downtown",45.418,-75.697],["Alta Vista",45.383,-75.655],["Gloucester",45.352,-75.615],["Orléans",45.455,-75.495],["Cumberland",45.505,-75.405],["Riverside S.",45.262,-75.665]]){
+    const p=proj(la,ln);const t=s("text",{class:"lbl",x:p.x.toFixed(0),y:(p.y+30).toFixed(0),"text-anchor":"middle"});t.textContent=n;svg.append(t);}
+  const w=s("text",{class:"lbl",x:"14",y:"612"});w.textContent="← West";svg.append(w);
+  const e=s("text",{class:"lbl",x:"886",y:"612","text-anchor":"end"});e.textContent="East →";svg.append(e);
+  reports.filter(r=>r.status!=="reunited").forEach((r,i)=>{
+    const p0=pos(r);if(!p0)return;let{x,y}=proj(p0.lat,p0.lng);
+    if(!p0.exact){x+=((i*37)%23)-11;y+=((i*53)%23)-11;}
+    const c=s("circle",{class:"pin",cx:x.toFixed(1),cy:y.toFixed(1),r:"15",fill:r.type==="lost"?"var(--lost)":"var(--found)",tabindex:"0"});
+    const tt=s("title",{});tt.textContent=title(r);c.append(tt);
+    c.addEventListener("click",()=>openDetail(r.id));c.addEventListener("keydown",ev=>{if(ev.key==="Enter")openDetail(r.id);});
+    svg.append(c);
+  });
+  $("#map").replaceChildren(svg);
+}
+function checkMyMatches(pairs){
+  const b=$("#banner-match");const ids=new Set(mine.map(m=>m.id));
+  const hits=pairs.filter(p=>ids.has(p.l.id)||ids.has(p.f.id));
+  if(!hits.length){b.classList.remove("show");return;}
+  const fresh=hits.filter(p=>!seen.has(p.l.id+"|"+p.f.id));
+  const top=hits[0];const me=ids.has(top.l.id)?top.l:top.f,other=me===top.l?top.f:top.l;
+  b.replaceChildren(el("b",{text:(fresh.length?"New: ":"")+"possible match for your report \""+(me.dog_name||me.breed||"dog")+"\". "}),
+    document.createTextNode(other.type==="found"?"A "+(other.breed||"dog")+" was found in "+other.neighbourhood+" on "+fmtDate(other.event_date)+". ":"A lost "+(other.breed||"dog")+" named "+(other.dog_name||"(no name)")+" from "+other.neighbourhood+". "),
+    el("button",{class:"btn",type:"button",onclick:()=>{openDetail(other.id);for(const p of hits)seen.add(p.l.id+"|"+p.f.id);store.set("odf-seen",[...seen]);}},"See it"));
+  b.classList.add("show");
+}
+
+/* ---------- detail ---------- */
+function openDetail(id){
+  const r=reports.find(x=>x.id===id);if(!r)return;
+  const d=$("#dlg-detail");$("#d-title").textContent=title(r);
+  const body=$("#d-body");body.replaceChildren();
+  const big=photoUrl(r,false);const img=el("img",{class:"detail-photo",alt:big?"Photo of the dog":"",src:big||placeholder(r.type),style:big?null:"max-height:140px"});img.onerror=()=>{img.src=placeholder(r.type);img.style.maxHeight="140px";};
+  body.append(img);
+  const facts=[
+    ["Status",r.status==="reunited"?"Reunited":r.type==="lost"?"Lost, still missing":"Found"+(SITUATION[r.situation]?": "+SITUATION[r.situation].toLowerCase():"")],
+    [r.type==="lost"?"Name":"Name on tag",r.dog_name||"—"],["Breed",r.breed||"—"],["Colour",r.colour||"—"],
+    ["Size",r.size||"—"],["Sex",r.sex||"—"],["Age",r.age||"—"],
+    ["Identification",({tag:"Collar with tag",microchip:"Microchip",tattoo:"Tattoo",none:"No ID",unknown:"Not sure"}[r.id_type]||"—")+(r.id_details?": "+r.id_details:"")],
+    ["Notes",(r.traits||[]).map(t=>TRAITS[t]).filter(Boolean).join(", ")||"—"],
+    [r.type==="lost"?"Last seen":"Found",fmtDate(r.event_date)+(r.event_time?" around "+r.event_time:"")],
+    ["Where",[r.address,r.neighbourhood].filter(Boolean).join(", ")+", Ottawa ON"],
+    ["Details",r.description||"—"],["Report id",r.id]];
+  const dl=el("dl",{class:"facts"});for(const[k,v]of facts)dl.append(el("dt",{text:k}),el("dd",{text:v}));body.append(dl);
+  const p=pos(r);
+  if(p){const q=p.exact?p.lat+","+p.lng:encodeURIComponent([r.address,r.neighbourhood,"Ottawa ON"].filter(Boolean).join(", "));
+    body.append(el("p",null,el("a",{href:"https://www.google.com/maps/search/?api=1&query="+q,target:"_blank",rel:"noopener"},p.exact?"Open the exact spot in Google Maps":"Open the area in Google Maps")));}
+  const cbox=el("div",{class:"contact"},el("span",{class:"meta",text:(r.type==="lost"?"Seen this dog? Call the owner.":"Is this your dog? Call the finder.")+" Phone ends in "+(r.phone_hint||"··")+"."}));
+  const rb=el("button",{class:"btn primary",type:"button",onclick:async()=>{
+    rb.disabled=true;rb.textContent="Loading…";
+    try{const c=await revealContact(r);cbox.replaceChildren(el("span",{class:"meta",text:"Call "+(c.contact_name||"the reporter")}),
+      el("a",{class:"phone",href:"tel:"+String(c.contact_phone||"").replace(/[^0-9+]/g,""),text:c.contact_phone||"—"}),
+      ...(c.contact_email?[el("span",{text:c.contact_email})]:[]),
+      el("span",{class:"meta",text:"Please use this number only to help reunite the dog."}));}
+    catch(e){rb.disabled=false;rb.textContent="Show phone number";cbox.append(el("span",{class:"err",text:e.message}));}
+  }},"Show phone number");
+  cbox.append(rb);body.append(cbox);
+  const ms=r.status==="reunited"?[]:matchesFor(r);
+  if(ms.length){
+    body.append(el("h3",{style:"margin:18px 0 8px;font-size:18px",text:"Possible matches"}));
+    const box=el("div",{class:"pairs"});
+    for(const m of ms.slice(0,5))box.append(el("div",{class:"pair",style:"grid-template-columns:1fr auto"},
+      el("button",{type:"button",onclick:()=>openDetail(m.r.id)},el("span",{class:"nm",text:title(m.r)}),el("span",{class:"sub",text:m.r.neighbourhood+" · "+fmtDate(m.r.event_date)})),
+      el("div",{class:"score"},String(m.s),el("small",{text:"match"}))));
+    body.append(box);
+  }
+  const row=el("div",{class:"row"});body.append(row);
+  if(r.type==="lost"&&r.status!=="reunited"){
+    const pre=el("pre",{class:"prompt"});pre.hidden=true;
+    row.append(el("button",{class:"btn primary",type:"button",onclick:ev=>{pre.textContent=aiPrompt(r);pre.hidden=false;copy(pre.textContent,ev.currentTarget);}},"Get AI watch instructions"));
+    body.append(pre);
+  }
+  if(r.status!=="reunited")row.append(el("button",{class:"btn",type:"button",onclick:()=>manage(r,"reunite")},"Mark as reunited"));
+  row.append(el("button",{class:"btn danger",type:"button",onclick:()=>manage(r,"remove")},"Remove report"));
+  try{history.replaceState(null,"","#r-"+r.id);}catch(e){}
+  if(!d.open)d.showModal();
+}
+$("#dlg-detail").addEventListener("close",()=>{if(location.hash.startsWith("#r-")){try{history.replaceState(null,"",location.pathname+location.search);}catch(e){}}});
+function openFromHash(){const m=location.hash.match(/^#r-([0-9a-z-]+)$/i);if(m&&reports.some(r=>r.id===m[1]))openDetail(m[1]);}
+window.addEventListener("hashchange",openFromHash);
+async function revealContact(r){
+  if(!LIVE)return{contact_name:r.contact_name,contact_phone:r.contact_phone,contact_email:r.contact_email};
+  const res=await rpc("reveal_contact",{p_id:r.id});const c=Array.isArray(res)?res[0]:res;
+  if(!c)throw new Error("This report is no longer available.");return c;
+}
+async function manage(r,action){
+  let code=myCode(r.id);
+  const body=$("#d-body");
+  if(!code){
+    const box=el("form",{class:"row"});const inp=el("input",{id:"mcode",placeholder:"Your private code",style:"padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--bg)"});
+    box.append(el("label",{for:"mcode",text:"Enter the private code you got when you posted:"}),inp,el("button",{class:"btn primary",type:"submit"},"Confirm"));
+    box.addEventListener("submit",e=>{e.preventDefault();code=inp.value.trim();if(code)doManage(r,action,code);});
+    body.append(box);inp.focus();return;
+  }
+  doManage(r,action,code);
+}
+async function doManage(r,action,code){
+  try{
+    if(LIVE){const ok=await rpc(action==="reunite"?"mark_reunited":"remove_report",{p_id:r.id,p_code:code});if(!ok)throw new Error("That code doesn't match this report.");}
+    else{ if(action==="reunite")r.status="reunited"; else reports=reports.filter(x=>x!==r); }
+    $("#dlg-detail").close();
+    info(action==="reunite"?"Marked as reunited. Wonderful news!":"Report removed.");
+    await load();
+  }catch(e){info(e.message);}
+}
+function aiPrompt(r){
+  const base=LIVE?API+"/rest/v1/reports_public":"[site database address, shown once the site is online]";
+  const key=LIVE?CFG.anonKey:"[public key]";
+  const site=(CFG.siteUrl||"[site address]").replace(/#.*$/,"");
+  return "Please watch for my lost dog on Lost & Found Dogs Ottawa ("+site+").\n"+
+  "My report id: "+r.id+". "+(r.dog_name||"Unnamed")+", "+(r.breed||"breed unknown")+", "+(r.colour||"colour unknown")+", "+r.size+", "+r.sex+", lost "+r.event_date+" near "+[r.address,r.neighbourhood].filter(Boolean).join(", ")+", Ottawa ON.\n\n"+
+  "The board's reports are open JSON data (phone numbers are not included):\n"+
+  "1) Reports the site already matched to my dog:\n"+base+"?select=*&match_ids=cs.%7B"+r.id+"%7D&apikey="+key+"\n"+
+  "2) Latest found dogs:\n"+base+"?select=*&type=eq.found&status=eq.open&order=created_at.desc&limit=50&apikey="+key+"\n\n"+
+  "Check these every few hours. Compare breed, colour, size, sex, distance from where my dog was lost, and the date (a dog can't be found before it was lost). "+
+  "As soon as a found dog plausibly matches, tell me right away: where and when it was found, its description, the photo link ("+(LIVE?API:"[site]")+"/storage/v1/object/public/photos/<photo>.jpg when photo isn't empty), "+
+  "and the link to open that report, which is "+site+"#r-<its id>. I'll get the finder's phone number from that page. If nothing matches, stay quiet.";
+}
+async function copy(text,btn){try{await navigator.clipboard.writeText(text);btn.textContent="Copied. Paste it into your AI assistant";}catch(e){btn.textContent="Select the text below and copy it";}}
+function info(m){const b=$("#banner-info");b.textContent=m;b.classList.add("show");}
+
+/* ---------- form ---------- */
+const form=$("#form");
+let photoBig=null,photoThumb=null;
+function openForm(type){
+  form.reset();photoBig=photoThumb=null;$("#ph-preview").src=placeholder(type);$("#coords-msg").textContent="";$("#form-err").textContent="";
+  $("#t-"+type).checked=true;setType(type);
+  const t=new Date();const iso=new Date(t.getTime()-t.getTimezoneOffset()*6e4).toISOString().slice(0,10);
+  $("#event_date").value=iso;$("#event_date").max=iso;
+  $("#dlg-form").showModal();
+}
+function setType(t){
+  $("#form-title").textContent=t==="lost"?"Report a lost dog":"Report a found dog";
+  $("#lbl-name").textContent=t==="lost"?"Dog's name *":"Name on tag (if any)";
+  $("#lbl-date").textContent=t==="lost"?"Date lost *":"Date found or seen *";
+  $("#lg-where").textContent=t==="lost"?"Where and when it went missing":"Where and when you found or saw it";
+  $("#fs-situation").hidden=t!=="found";
+}
+form.addEventListener("change",e=>{if(e.target.name==="type")setType(e.target.value);});
+$("#btn-lost").addEventListener("click",()=>openForm("lost"));
+$("#btn-found").addEventListener("click",()=>openForm("found"));
+document.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click",()=>b.closest("dialog").close()));
+
+function parseCoords(s){
+  s=String(s||"").trim();if(!s)return null;
+  const m=s.match(/@(-?\d+\.\d+),\s*(-?\d+\.\d+)/)||s.match(/[?&](?:q|query|ll|destination)=(-?\d+\.\d+)(?:,|%2C)\s*(-?\d+\.\d+)/i)||s.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/)||s.match(/^\s*\(?(-?\d{1,2}\.\d+)\s*,\s*(-?\d{1,3}\.\d+)\)?\s*$/);
+  if(!m)return{error:"Couldn't read a location from that. Paste the numbers Google Maps shows, like 45.3087, -75.9064."};
+  const lat=parseFloat(m[1]),lng=parseFloat(m[2]);
+  if(lat<BOX.latMin||lat>BOX.latMax||lng<BOX.lngMin||lng>BOX.lngMax)return{error:"That spot is outside the Stittsville to Cumberland area this board covers."};
+  return{lat,lng};
+}
+$("#coords").addEventListener("input",()=>{
+  const v=parseCoords($("#coords").value),m=$("#coords-msg");
+  if(!v){m.textContent="";m.className="";return;}
+  if(v.error){m.textContent=v.error;m.className="loc-bad";return;}
+  m.textContent="Location found: "+v.lat.toFixed(5)+", "+v.lng.toFixed(5);m.className="loc-ok";
+  let best=null,bd=1e9;for(const[n,la,ln]of HOODS){const d=km({lat:la,lng:ln},v);if(d<bd){bd=d;best=n;}}
+  if(best&&!$("#hood").value)$("#hood").value=best;
+});
+$("#address").addEventListener("input",()=>{const q=[$("#address").value,$("#hood").value,"Ottawa ON"].filter(Boolean).join(", ");$("#gmaps-open").href="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);});
+
+function resize(file,max,q){return new Promise((res,rej)=>{const url=URL.createObjectURL(file);const im=new Image();im.onload=()=>{const k=Math.min(1,max/Math.max(im.width,im.height));const c=document.createElement("canvas");c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext("2d").drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(url);c.toBlob(b=>b?res(b):rej(new Error("Couldn't read that photo.")),"image/jpeg",q);};im.onerror=()=>{URL.revokeObjectURL(url);rej(new Error("That file isn't a photo we can read. Try a JPG or PNG."));};im.src=url;});}
+$("#ph").addEventListener("change",async e=>{
+  const f=e.target.files&&e.target.files[0];if(!f)return;
+  try{photoBig=await resize(f,1000,0.75);if(photoBig.size>900000)photoBig=await resize(f,800,0.6);photoThumb=await resize(f,260,0.65);
+    $("#ph-preview").src=URL.createObjectURL(photoThumb);$("#form-err").textContent="";}
+  catch(err){$("#form-err").textContent=err.message;photoBig=photoThumb=null;}
+});
+
+form.addEventListener("submit",async e=>{
+  e.preventDefault();
+  const err=$("#form-err");err.textContent="";
+  const type=(form.querySelector("input[name=type]:checked")||{}).value;
+  const v=id=>$("#"+id).value.trim();
+  if(!type)return err.textContent="Choose lost or found.";
+  if(type==="lost"&&!v("dog_name"))return err.textContent="Add your dog's name.";
+  if(!v("hood"))return err.textContent="Choose a neighbourhood.";
+  if(!v("event_date"))return err.textContent="Add the date.";
+  if(!v("contact_name")||v("contact_phone").replace(/\D/g,"").length<7)return err.textContent="Add your name and a phone number so people can call you.";
+  if(!$("#consent").checked)return err.textContent="Tick the box to agree that the report is shown publicly.";
+  const c=parseCoords(v("coords"));if(c&&c.error)return err.textContent=c.error;
+  if(v("website")){$("#dlg-form").close();return;} // bot
+  const data={type,dog_name:v("dog_name"),breed:v("breed"),colour:v("colour"),size:v("size"),sex:v("sex"),age:v("age"),
+    id_type:v("id_type"),id_details:v("id_details"),traits:[...document.querySelectorAll("#traits input:checked")].map(i=>i.value),
+    situation:type==="found"?(form.querySelector("input[name=situation]:checked")||{}).value||"":"",
+    neighbourhood:v("hood"),address:v("address"),lat:c?c.lat:null,lng:c?c.lng:null,event_date:v("event_date"),event_time:v("event_time"),
+    description:v("description"),contact_name:v("contact_name"),contact_phone:v("contact_phone"),contact_email:v("contact_email"),photo:""};
+  const ms=reports.filter(x=>x.type!==type&&x.status!=="reunited").map(x=>({id:x.id,score:type==="lost"?matchScore(data,x):matchScore(x,data)})).filter(m=>m.score>=MATCH_MIN).sort((a,b)=>b.score-a.score).slice(0,20);
+  data.matches=ms;data.match_ids=ms.map(m=>m.id);
+  const btn=$("#submit");btn.disabled=true;btn.textContent="Posting…";
+  try{
+    let id,code;
+    if(LIVE){
+      if(photoBig){const name=(crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).slice(2));await upload(name+".jpg",photoBig);if(photoThumb)await upload(name+"-t.jpg",photoThumb);data.photo=name;}
+      const res=await rpc("submit_report",{p:data});const row=Array.isArray(res)?res[0]:res;id=row.id;code=row.manage_code;
+    }else{
+      id="demo-"+Date.now();code="preview";
+      reports.unshift(Object.assign({id,status:"open",created_at:new Date().toISOString(),_demoPhoto:photoThumb?URL.createObjectURL(photoThumb):null},data));
+    }
+    mine.push({id,code});store.set("odf-mine",mine);
+    $("#dlg-form").close();
+    await load();
+    showPosted(id,code);
+  }catch(ex){err.textContent="Couldn't post the report: "+ex.message;}
+  finally{btn.disabled=false;btn.textContent="Post report";}
+});
+function showPosted(id,code){
+  const r=reports.find(x=>x.id===id);
+  const d=$("#dlg-detail");$("#d-title").textContent="Your report is posted";
+  const body=$("#d-body");body.replaceChildren(
+    el("p",{text:"Keep this private code. You need it to mark the dog as reunited or remove the report from another device."}),
+    el("span",{class:"code",text:code}),
+    el("p",{text:r&&matchesFor(r).length?"There are already possible matches. Open your report to see them.":"We'll show possible matches here as soon as they're posted."}),
+    el("div",{class:"row"},el("button",{class:"btn primary",type:"button",onclick:()=>openDetail(id)},"Open my report")));
+  if(!d.open)d.showModal();
+}
+
+/* ---------- filters ---------- */
+document.querySelectorAll(".seg button").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".seg button").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));filter.type=b.dataset.f;render();}));
+$("#f-hood").addEventListener("change",e=>{filter.hood=e.target.value;render();});
+$("#f-q").addEventListener("input",e=>{filter.q=e.target.value;render();});
+$("#f-reunited").addEventListener("change",e=>{filter.reunited=e.target.checked;render();});
+for(const[n]of HOODS){$("#f-hood").append(el("option",{value:n,text:n}));$("#hood").append(el("option",{value:n,text:n}));}
+for(const b of BREEDS)$("#breeds").append(el("option",{value:b}));
+
+/* ---------- load ---------- */
+async function load(){
+  const chip=$("#loading-chip");
+  if(!LIVE){ if(!reports.length)reports=demoRows(); if(chip)chip.textContent="Preview: example dogs, nothing is saved"; render(); return; }
+  try{
+    const rows=await rest("reports_public?select=*&order=created_at.desc&limit=500");
+    reports=rows;if(chip)chip.remove();render();
+  }catch(e){if(chip)chip.textContent="Couldn't load reports. Check your connection.";}
+}
+function logVisit(){
+  if(!LIVE)return;
+  let vid=store.get("odf-vid",null);if(!vid){vid=Math.random().toString(36).slice(2)+Date.now().toString(36);store.set("odf-vid",vid);}
+  let ref="";try{const u=new URL(document.referrer);if(u.hostname!==location.hostname)ref=u.hostname;}catch(e){}
+  const dev=innerWidth<700?"phone":innerWidth<1100?"tablet":"desktop";
+  rpc("log_visit",{p_path:location.pathname,p_referrer:ref,p_device:dev,p_visitor:vid}).catch(()=>{});
+}
+render();load().then(openFromHash);logVisit();
+if(LIVE)setInterval(()=>{if(!document.hidden)load();},120000);
+})();
+</script>
+</body>
+</html>

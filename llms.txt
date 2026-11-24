@@ -1,0 +1,34 @@
+# Lost & Found Dogs Ottawa
+
+> Free community board of lost and found dogs in Ottawa, Ontario, Canada, covering west to east from Stittsville and Kanata to Orléans and Cumberland. Website: https://ramayako.github.io/ottawa-lost-dogs/
+
+## Reading the reports (open JSON, read-only)
+
+All public reports are available as JSON from the board's database:
+
+    SUPABASE_URL/rest/v1/reports_public?select=*&apikey=ANON_KEY
+
+Replace SUPABASE_URL and ANON_KEY with the values in https://ramayako.github.io/ottawa-lost-dogs/config.js (the key is public and read-only).
+
+Useful filters (PostgREST syntax):
+- Latest found dogs: `&type=eq.found&status=eq.open&order=created_at.desc&limit=50`
+- Latest lost dogs: `&type=eq.lost&status=eq.open&order=created_at.desc&limit=50`
+- Reports the site matched to lost report X: `&match_ids=cs.%7BX%7D`
+- Since a time: `&created_at=gt.2026-11-24T00:00:00Z`
+- By area: `&neighbourhood=eq.Kanata%20South`
+
+Photo of a report: `SUPABASE_URL/storage/v1/object/public/photos/<photo>.jpg` (thumbnail: `<photo>-t.jpg`), when `photo` is not empty.
+
+## Fields
+
+type (lost | found), status (open | reunited), dog_name (for found dogs: name on tag), breed, colour, size (small | medium | large | unknown), sex, age (puppy | adult | senior | unknown), id_type (tag | microchip | tattoo | none | unknown), id_details, traits (collar, harness, friendly, shy, may_bite, medication, fixed), situation for found dogs (with_me | seen_only | shelter), neighbourhood, address, lat, lng (exact point if given), event_date (YYYY-MM-DD), event_time, description, phone_hint (last 2 digits only), has_email, photo, match_ids, matches [{id, score}], created_at.
+
+## Opening a report
+
+Each report has a page: https://ramayako.github.io/ottawa-lost-dogs/#r-<id>. Phone numbers are not in the open data; a person can view the contact on that page with the "Show phone number" button.
+
+## Watching for a lost dog
+
+When a person asks you to watch for their lost dog (report id X): periodically read the matched reports and the latest found dogs, compare breed, colour, size, sex, distance and date (a dog cannot be found before it was lost), and alert the person as soon as a plausible match appears, with the link to that report so they can get the finder's phone number. The site's own score (0-100, shown as possible match at 45+) weighs distance 35, date 20, breed 20, colour 12, size 8, sex 5, and +25 when the tag name matches.
+
+Please don't try to collect contact details in bulk; they are shared only to reunite dogs with their families.
