@@ -1,6 +1,15 @@
 {
-  "updated_at": "2026-11-26T02:54:00Z",
+  "updated_at": "2026-11-26T03:09:40.264Z",
   "reports": [
+    {
+      "title": "Lexy",
+      "source": "Lost.ca",
+      "url": "https://lost.ca/pet/L-451297-lexy-dog-german-sheppard-cumberland-orleans",
+      "type": "lost",
+      "area": "Cumberland / Orléans",
+      "description": "Large black and brown German Shepherd; listed missing, posted four days before November 25.",
+      "checked_at": "2026-11-25"
+    },
     {
       "title": "Hazel",
       "area": "Westboro",
