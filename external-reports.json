@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-26T03:09:40.264Z",
+  "updated_at": "2026-11-26T03:22:22Z",
   "reports": [
     {
       "title": "Lexy",
@@ -38,21 +38,12 @@
       "checked_at": "2026-11-25"
     },
     {
-      "title": "Shelter dog A277017",
-      "area": "Ottawa Humane Society",
-      "description": "Black and brown male Rottweiler; shelter listing since Nov 17. Confirm current status with shelter.",
-      "url": "https://24petconnect.com/DetailsMain/OTTW/A277017",
-      "source": "24Petconnect / Ottawa Humane Society",
-      "type": "unknown",
-      "checked_at": "2026-11-25"
-    },
-    {
-      "title": "Shelter dog A276970",
-      "area": "Ottawa Humane Society",
-      "description": "Tan female Labrador Retriever mix; shelter listing since Nov 14. Confirm current status with shelter.",
-      "url": "https://24petconnect.com/DetailsMain/OTTW/A276970",
-      "source": "24Petconnect / Ottawa Humane Society",
-      "type": "unknown",
+      "title": "Cooper",
+      "source": "Lost.ca",
+      "url": "https://lost.ca/pet/L-449998-cooper-dog-german-shorthaired-ottawa",
+      "type": "lost",
+      "area": "The Glebe",
+      "description": "White German Shorthaired Pointer, large; reported missing November 11, 2026.",
       "checked_at": "2026-11-25"
     }
   ]
