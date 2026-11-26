@@ -8,7 +8,10 @@
       "type": "lost",
       "area": "Cumberland / Orléans",
       "description": "Large black and brown German Shepherd; listed missing, posted four days before November 25.",
-      "checked_at": "2026-11-25"
+      "checked_at": "2026-11-25",
+      "published_at": "2026-11-21",
+      "indexed_at": "2026-11-25",
+      "expires_at": "2026-12-11T00:00:00.000Z"
     },
     {
       "title": "Hazel",
@@ -17,7 +20,10 @@
       "url": "https://lost.ca/pet/L-479834-hazel-dog-scottish-terrier-ottawa",
       "source": "Lost.ca",
       "type": "lost",
-      "checked_at": "2026-11-25"
+      "checked_at": "2026-11-25",
+      "published_at": null,
+      "indexed_at": "2026-11-25",
+      "expires_at": "2026-12-15T00:00:00.000Z"
     },
     {
       "title": "Finn",
@@ -26,7 +32,10 @@
       "url": "https://lost.ca/pet/L-508980-finn-dog-basset-hound-ottawa",
       "source": "Lost.ca",
       "type": "lost",
-      "checked_at": "2026-11-25"
+      "checked_at": "2026-11-25",
+      "published_at": null,
+      "indexed_at": "2026-11-25",
+      "expires_at": "2026-12-15T00:00:00.000Z"
     },
     {
       "title": "Rocky",
@@ -35,7 +44,10 @@
       "url": "https://lost.ca/pet/L-450970-rocky-dog-saint-bernard-ottawa",
       "source": "Lost.ca",
       "type": "lost",
-      "checked_at": "2026-11-25"
+      "checked_at": "2026-11-25",
+      "published_at": null,
+      "indexed_at": "2026-11-25",
+      "expires_at": "2026-12-15T00:00:00.000Z"
     },
     {
       "title": "Cooper",
@@ -44,7 +56,10 @@
       "type": "lost",
       "area": "The Glebe",
       "description": "White German Shorthaired Pointer, large; reported missing November 11, 2026.",
-      "checked_at": "2026-11-25"
+      "checked_at": "2026-11-25",
+      "published_at": "2026-11-11",
+      "indexed_at": "2026-11-25",
+      "expires_at": "2026-12-01T00:00:00.000Z"
     }
   ]
 }
