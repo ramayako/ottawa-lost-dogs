@@ -252,7 +252,7 @@ dl.facts dd{margin:0;overflow-wrap:anywhere}
 <h2 id="external-title">Search across Ottawa</h2>
 <p>Look beyond this board. Search public listings by breed, colour, name or neighbourhood. Always confirm the dog's status at the original source.</p>
 <div class="f"><label for="external-q">Dog description or neighbourhood</label><input id="external-q" type="search" maxlength="120" placeholder="e.g. white Maltese Orléans"></div>
-<div class="f" style="margin-top:8px"><label for="external-type">I am looking for</label><select id="external-type"><option value="found">Found or spotted dogs (my dog is missing)</option><option value="lost">Missing dogs (I found a dog)</option><option value="all">Both</option></select></div>
+<div class="f" style="margin-top:8px"><label for="external-type">I am looking for</label><select id="external-type"><option value="found">Found or spotted dogs (my dog is missing)</option><option value="lost">Missing dogs (I found a dog)</option><option value="all" selected>Both</option></select></div>
 <div id="external-links" class="res" style="margin-top:12px"></div>
 <p><small>Search links open the original websites or public web search. Private Facebook posts may not appear. No affiliation with the listed organizations.</small></p>
 <h3 style="font-size:17px;margin-top:16px">External report watch</h3>
@@ -773,7 +773,7 @@ for(const b of BREEDS)$("#breeds").append(el("option",{value:b}));
 /* ---------- load ---------- */
 async function load(){
   const chip=$("#loading-chip");
-  if(!LIVE){ if(!reports.length)reports=demoRows(); if(chip)chip.textContent="Preview: example dogs, nothing is saved"; render(); return; }
+  if(!LIVE){ reports=[]; if(chip)chip.textContent="Community reporting is not connected yet. Browse external reports below."; render(); return; }
   try{
     const rows=await rest("reports_public?select=*&order=created_at.desc&limit=500");
     reports=rows;if(chip)chip.remove();render();
