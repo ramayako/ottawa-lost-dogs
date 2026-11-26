@@ -248,7 +248,19 @@ dl.facts dd{margin:0;overflow-wrap:anywhere}
       <input id="f-q" type="search" placeholder="Breed, colour, name…" aria-label="Search">
       <label style="font-size:14px;display:flex;gap:6px;align-items:center"><input type="checkbox" id="f-reunited"> Show reunited</label>
     </div>
-    <div class="list" id="list"></div>
+    <section class="panel" aria-labelledby="external-title" style="margin-bottom:16px">
+<h2 id="external-title">Search across Ottawa</h2>
+<p>Look beyond this board. Search public listings by breed, colour, name or neighbourhood. Always confirm the dog's status at the original source.</p>
+<div class="f"><label for="external-q">Dog description or neighbourhood</label><input id="external-q" type="search" maxlength="120" placeholder="e.g. white Maltese Orléans"></div>
+<div class="f" style="margin-top:8px"><label for="external-type">I am looking for</label><select id="external-type"><option value="found">Found or spotted dogs (my dog is missing)</option><option value="lost">Missing dogs (I found a dog)</option><option value="all">Both</option></select></div>
+<div id="external-links" class="res" style="margin-top:12px"></div>
+<p><small>Search links open the original websites or public web search. Private Facebook posts may not appear. No affiliation with the listed organizations.</small></p>
+<h3 style="font-size:17px;margin-top:16px">External report watch</h3>
+<p id="external-status" role="status">Checking external report index…</p>
+<div id="external-reports" class="res"></div>
+<p><small>External reports are leads, not verified matches. Do not send money or verification codes to someone claiming to have your dog.</small></p>
+</section>
+<div class="list" id="list"></div>
   </section>
 
   <aside>
@@ -776,6 +788,23 @@ function logVisit(){
 }
 render();load().then(openFromHash);logVisit();
 if(LIVE)setInterval(()=>{if(!document.hidden)load();},120000);
+})();
+</script>
+<script>
+(()=>{"use strict";
+const q=document.getElementById("external-q"), t=document.getElementById("external-type"), links=document.getElementById("external-links"), out=document.getElementById("external-reports"), status=document.getElementById("external-status");
+let rows=[];
+const google=(query)=>"https://www.google.com/search?q="+encodeURIComponent(query);
+const sources=[
+["Ottawa Humane Society — found dogs","https://www.ottawahumane.ca/get-help/lost-and-found/pictures-of-found-dogs/"],
+["PawBoost — lost dogs","https://www.pawboost.com/lost-found-pets/ottawa-on/all-lost-dogs/page-1"],
+["Lost.ca — found dogs","https://lost.ca/found/ottawa/dogs"],
+["Ottawa & Valley Lost Pet Network","https://www.facebook.com/lostpetnetwork/"],
+["City of Ottawa — report a lost pet","https://ottawa.ca/en/living-ottawa/animals-and-pets/lost-and-found-pets/report-lost-pet"]];
+function link(parent,label,url){const a=document.createElement("a");a.textContent=label;a.href=url;a.target="_blank";a.rel="noopener noreferrer";parent.append(a);}
+function render(){const term=q.value.trim(), kind=t.value==="all"?"lost OR found OR spotted":t.value==="found"?"found OR spotted":"lost OR missing";const query="Ottawa dog ("+kind+") "+term;links.replaceChildren();link(links,"Search all public web results",google(query));for(const [name,url] of sources)link(links,name,url);for(const [name,domain] of [["PawBoost","pawboost.com"],["Lost.ca","lost.ca"],["Reddit Ottawa","reddit.com/r/ottawa"],["Facebook public posts","facebook.com"],["Kijiji","kijiji.ca"]])link(links,"Search "+name+" by description",google("site:"+domain+" "+query));out.replaceChildren();const words=term.toLowerCase().split(/\s+/).filter(Boolean);const scored=rows.filter(r=>t.value==="all"||r.type===t.value||r.type==="unknown").map(r=>({r,score:words.filter(w=>(r.title+" "+r.area+" "+r.description).toLowerCase().includes(w)).length})).filter(x=>!words.length||x.score>0).sort((a,b)=>b.score-a.score||String(b.r.checked_at).localeCompare(String(a.r.checked_at)));for(const {r} of scored){const p=document.createElement("p");link(p,r.title+" — "+r.source,r.url);const small=document.createElement("small");small.textContent=[r.area,r.description,"Checked "+r.checked_at].filter(Boolean).join(" · ");p.append(small);out.append(p);}if(rows.length&&!scored.length)out.textContent="No indexed leads match these filters. Try the live search links above.";}
+q.addEventListener("input",render);t.addEventListener("change",render);render();
+fetch("external-reports.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error();return r.json();}).then(data=>{rows=(Array.isArray(data.reports)?data.reports:[]).filter(r=>{try{return typeof r.title==="string"&&new URL(r.url).protocol==="https:";}catch{return false;}});status.textContent=data.updated_at?"Last index check: "+data.updated_at+" UTC. "+rows.length+" public leads.":"No automated index check yet. Use the live search links above.";render();}).catch(()=>{status.textContent="External index unavailable. Live search links still work.";});
 })();
 </script>
 </body>
