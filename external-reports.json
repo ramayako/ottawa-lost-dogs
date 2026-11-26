@@ -1,4 +1,50 @@
 {
-  "updated_at": null,
-  "reports": []
+  "updated_at": "2026-11-26T02:54:00Z",
+  "reports": [
+    {
+      "title": "Hazel",
+      "area": "Westboro",
+      "description": "Brown and white Scottish Terrier",
+      "url": "https://lost.ca/pet/L-479834-hazel-dog-scottish-terrier-ottawa",
+      "source": "Lost.ca",
+      "type": "lost",
+      "checked_at": "2026-11-25"
+    },
+    {
+      "title": "Finn",
+      "area": "Hintonburg",
+      "description": "White Basset Hound",
+      "url": "https://lost.ca/pet/L-508980-finn-dog-basset-hound-ottawa",
+      "source": "Lost.ca",
+      "type": "lost",
+      "checked_at": "2026-11-25"
+    },
+    {
+      "title": "Rocky",
+      "area": "ByWard Market",
+      "description": "Grey Saint Bernard",
+      "url": "https://lost.ca/pet/L-450970-rocky-dog-saint-bernard-ottawa",
+      "source": "Lost.ca",
+      "type": "lost",
+      "checked_at": "2026-11-25"
+    },
+    {
+      "title": "Shelter dog A277017",
+      "area": "Ottawa Humane Society",
+      "description": "Black and brown male Rottweiler; shelter listing since Nov 17. Confirm current status with shelter.",
+      "url": "https://24petconnect.com/DetailsMain/OTTW/A277017",
+      "source": "24Petconnect / Ottawa Humane Society",
+      "type": "unknown",
+      "checked_at": "2026-11-25"
+    },
+    {
+      "title": "Shelter dog A276970",
+      "area": "Ottawa Humane Society",
+      "description": "Tan female Labrador Retriever mix; shelter listing since Nov 14. Confirm current status with shelter.",
+      "url": "https://24petconnect.com/DetailsMain/OTTW/A276970",
+      "source": "24Petconnect / Ottawa Humane Society",
+      "type": "unknown",
+      "checked_at": "2026-11-25"
+    }
+  ]
 }
