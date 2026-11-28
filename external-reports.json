@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-27T21:10:23Z",
+  "updated_at": "2026-11-28T06:39:37Z",
   "reports": [
     {
       "title": "Lexy",
@@ -8,7 +8,7 @@
       "type": "lost",
       "area": "Cumberland / Orléans",
       "description": "Large black and brown German Shepherd; listed missing, posted four days before November 25.",
-      "checked_at": "2026-11-27",
+      "checked_at": "2026-11-28",
       "published_at": "2026-11-21",
       "indexed_at": "2026-11-25",
       "expires_at": "2026-12-11T00:00:00.000Z"
@@ -56,7 +56,7 @@
       "type": "lost",
       "area": "The Glebe",
       "description": "White German Shorthaired Pointer, large; reported missing November 11, 2026.",
-      "checked_at": "2026-11-27",
+      "checked_at": "2026-11-28",
       "published_at": "2026-11-11",
       "indexed_at": "2026-11-25",
       "expires_at": "2026-12-01T00:00:00.000Z"
